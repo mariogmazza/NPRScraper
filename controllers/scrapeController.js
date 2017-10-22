@@ -10,24 +10,12 @@ var router = express.Router();
 
 
 // Require all models
-var theTwo = require("../models/theTwo.js");
 var Article = require("../models/Article.js");
 var Note = require("../models/Note.js");
 
 
 
 // Routes
-// Users\DJMONO\Desktop\code\HOMEWORK\thescraper\models
-
-
-// router.get("/", function (req, res) {
-
-//     res.render("index");
-
-// });
-
-
-
   router.get("/", function(req, res) {
     Article.find({}).then(function(found){
 
@@ -45,17 +33,14 @@ var Note = require("../models/Note.js");
 
 
 
-
-
-
-// A GET route for scraping the echojs website
+// A GET route for scraping the NPR website
 router.get("/scrape", function (req, res) {
     // First, we grab the body of the html with request
     axios.get("http://www.npr.org/").then(function (response) {
         // Then, we load that into cheerio and save it to $ for a shorthand selector
         var $ = cheerio.load(response.data);
 
-        // Now, we grab every h2 within an article tag, and do the following:
+        // Now, we grab every div within an article tag, and do the following:
         $(".story-wrap").each(function (i, element) { // Save an empty result object
             var result = {};
 
@@ -69,12 +54,6 @@ router.get("/scrape", function (req, res) {
                 result.title = title;
                 result.teaser = teaser;
                 result.link = link;
-            
-            // console.log(result.teaser);
-            // console.log(result.title);
-            // console.log(result.link);
-
-            // console.log("hey im in");
 
             // Create a new Article using the `result` object built from scraping
             Article
@@ -94,24 +73,6 @@ router.get("/scrape", function (req, res) {
     });
 
 });
-
-
-//   // Route for grabbing a specific Article by id, populate it with it's note
-//   router.get("/articles/:id", function(req, res) {
-//     // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-//     Article
-//       .findOne({ _id: req.params.id })
-//       // ..and populate all of the notes associated with it
-//       .populate("note")
-//       .then(function(dbArticle) {
-//         // If we were able to successfully find an Article with the given id, send it back to the client
-//         res.json(dbArticle);
-//       })
-//       .catch(function(err) {
-//         // If an error occurred, send it to the client
-//         res.json(err);
-//       });
-//   });
 
   // Route for saving/updating an Article's associated Note
   router.get("/save/:id", function(req, res) {
@@ -176,8 +137,6 @@ router.get("/delete/:id", function(req, res) {
 
 
 
-
-
 // Route for saving/updating an Article's associated Note
 router.post("/articles/:id", function(req, res) {
     // Create a new note and pass the req.body to the entry
@@ -221,7 +180,7 @@ router.get("/articles/:id", function(req, res) {
 
 //   Character.remove({ name: 'Eddard Stark' }, function (err) {});
 
-  // Route for saving/updating an Article's associated Note
+  // Route for removing/updating an Article's associated Note
 router.get("/remove/:id", function(req, res) {
     // Create a new note and pass the req.body to the entry
     Note
