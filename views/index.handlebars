@@ -1,0 +1,48 @@
+
+{{!-- {{#each Article}}
+{{#unless saveArticle}}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>
+            <a class="article-link" target="_blank" href="{{link}}">{{title}}</a>
+            <a class="btn btn-success save">Save Article</a>
+        </h3>
+    </div>
+    <div class="panel-body">{{teaser}}</div>
+</div>
+{{/unless}}
+{{/each}} --}}
+
+
+
+
+{{#unless Article}}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>
+          You got Nothing!!
+        </h3>
+    </div>
+    <div class="panel-body">NADA ME AMIGO</div>
+</div>
+{{/unless}}
+
+
+<ul>
+  {{#each Article}}
+    {{#unless saveArticle}}
+      {{> panels/notSaved-all }}
+    {{/unless}}
+  {{/each}}
+</ul>
+
+<!-- <h2>Panels the have been saved!</h2> -->
+
+{{!-- 
+<ul>
+  {{#each Article}}
+    {{#if saveArticle}}
+      {{> panels/saved-all }}
+    {{/if}}
+  {{/each}}
+</ul> --}}
