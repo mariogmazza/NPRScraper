@@ -24,10 +24,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-// mongoose.connect("mongodb://localhost/scrapedNews", {
-//   useMongoClient: true
-// });
-
 if (process.env.MONGODB_URI){
   mongoose.connect(process.env.MONGODB_URI)
 }else{
