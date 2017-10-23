@@ -7,7 +7,7 @@ var cheerio = require("cheerio");
 var logger = require("morgan");
 
 
-var PORT = 3000;
+var PORT = process.env.PORT || 8080;
 // Initialize Express
 var app = express();
 
@@ -24,9 +24,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/scrapedNews", {
-  useMongoClient: true
-});
+// mongoose.connect("mongodb://localhost/scrapedNews", {
+//   useMongoClient: true
+// });
+
+if (process.env.MONGODB_URI){
+  mongoose.connect(process.env.MONGODB_URI)
+}else{
+  mongoose.connect("mongodb://localhost/scrapeNews", {
+      useMongoClient: true
+  })
+}
 
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
