@@ -10,8 +10,7 @@
 
 
 ## Live DEMO 
-### https://mariogmazza.github.io/NPRScraper/
-
+### https://npr-scraper2017.herokuapp.com/
 ![demo1](https://github.com/mariogmazza/NPRScraper/blob/master/public/assets/img/NPR_Scraper.gif)
 
 + All articles can be deleted from the saved status.
